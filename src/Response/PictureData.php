@@ -7,6 +7,7 @@ class PictureData
     private $server;
     private $id;
     private $secret;
+    private $title;
     
     public function __construct(\SimpleXMLElement $xml)
     {
@@ -14,11 +15,14 @@ class PictureData
         $this->secret = (string)$xml['secret'];
         $this->farm = (string)$xml['farm'];
         $this->server = (string)$xml['server'];
+        $this->title = (string)$xml['title'];
     }
     
-    public function __toString()
+    public function getData()
     {
-        return 'https://farm' . $this->farm . '.staticflickr.com/'
-            . $this->server . '/' . $this->id . '_' . $this->secret . '.jpg';
+        return array(
+        	'url' => 'https://farm' . $this->farm . '.staticflickr.com/' . $this->server . '/' . $this->id . '_' . $this->secret . '.jpg',
+        	'title' => $this->title,
+        );
     }
 }

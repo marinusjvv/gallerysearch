@@ -3,7 +3,7 @@ namespace MarinusJvv\GallerySearch;
 
 use MarinusJvv\GallerySearch\Validator;
 use MarinusJvv\GallerySearch\Api\Caller;
-use MarinusJvv\GallerySearch\Exceptions\InvalidSearchStringException;
+use MarinusJvv\GallerySearch\Exceptions as Exceptions;
 
 class Search 
 {
@@ -11,8 +11,8 @@ class Search
     {
         try {
             Validator::validateSearchString($search_string);
-        } catch (InvalidSearchStringException $e) {
-            return array('status' => 'error', 'message' => $e->getMessage());
+        } catch (Exceptions\InvalidSearchStringException $e) {
+            return $this->buildErrorResponse($e);
         }
         $caller = new Caller(
             API_URL,
@@ -24,11 +24,21 @@ class Search
                 'tags' => $search_string,
             )
         );
-        $response = new Response\XmlParser($caller->call());
+        try {
+        	$response = new Response\XmlParser($caller->call());
+        } catch (Exceptions\InvalidResponseXMLException $e) {
+        	return $this->buildErrorResponse($e);
+        }
+        
         return array(
             'status' => 'success',
             'page_data' => $response->getPageData()->getOutputData(),
             'pictures_data' => $response->getPicturesData(),
         );
+    }
+    
+    private function buildErrorResponse(\Exception $e)
+    {
+    	return array('status' => 'error', 'message' => $e->getMessage());
     }
 }

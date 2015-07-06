@@ -35,16 +35,24 @@ class XmlParser
         if ($this->isInvalidResponseXML($parsedXML) === true) {
             throw new InvalidResponseXMLException();
         }
+        if ($this->isFailedResponseXML((string)$parsedXML['stat']) === true) {
+        	throw new InvalidResponseXMLException((string)$parsedXML->err['msg']);
+        }
         $this->pageData = new PageData($parsedXML);
         foreach ($parsedXML->photos->photo as $photo) {
-            $this->picturesData[] = (string)new PictureData($photo);
+        	$picture = new PictureData($photo);
+            $this->picturesData[] = $picture->getData();
         }
     }
     
     private function isInvalidResponseXML($parsedXML)
     {
         return $parsedXML === false
-            || empty($parsedXML['stat']) === true
-            || (string)$parsedXML['stat'] !== 'ok';
+            || empty($parsedXML['stat']) === true;
+    }
+    
+    private function isFailedResponseXML($response)
+    {
+    	return $response !== 'ok';
     }
 }

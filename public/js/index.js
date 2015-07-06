@@ -50,9 +50,10 @@ function Index () {
             
     this.showThumbnails = function(returned) {
         count = 1;
-        $.each(returned, function(index, value){
+        $.each(returned, function(index, value) {
             container = $('#thumbnail_picture_' + count);
-            container.find('img').attr("src", value);
+            container.find('img').attr("src", value.url);
+            container.find('h2').text(value.title.substring(0, 10) + '...');
             count++;
         });
     },

@@ -40,25 +40,25 @@
             <div class="col-md-10" id="thumbnails">
                 <div class="row">
                     <div class="col-md-4" id="thumbnail_picture_1">
-                        <h2>1</h2>
+                        <h2></h2>
                         <img class="thumbnail-container-img" src="public/images/default_image.png">
                     </div>
                     <div class="col-md-4" id="thumbnail_picture_2">
-                        <h2>2</h2>
+                        <h2></h2>
                         <img class="thumbnail-container-img" src="public/images/default_image.png">
                     </div>
                     <div class="col-md-4" id="thumbnail_picture_3">
-                        <h2>3</h2>
+                        <h2></h2>
                         <img class="thumbnail-container-img" src="public/images/default_image.png">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-offset-2 col-md-4" id="thumbnail_picture_4">
-                        <h2>4</h2>
+                        <h2></h2>
                         <img class="thumbnail-container-img" src="public/images/default_image.png">
                     </div>
                     <div class="col-md-4" id="thumbnail_picture_5">
-                        <h2>5</h2>
+                        <h2></h2>
                         <img class="thumbnail-container-img" src="public/images/default_image.png">
                     </div>
                 </div>
@@ -69,8 +69,6 @@
         </div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="public/js/index.js"></script>
     </body>
 </html>
