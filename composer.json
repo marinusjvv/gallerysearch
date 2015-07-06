@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "MarinusJvv\\GallerySearch\\": "src"
+            "MarinusJvv\\GallerySearch\\": "src",
+            "MarinusJvv\\Tests\\": "tests"
         }
     }
 }

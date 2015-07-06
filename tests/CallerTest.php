@@ -1,9 +1,11 @@
 <?php
+namespace MarinusJvv\Tests;
+
 use MarinusJvv\GallerySearch\Api\Caller;
 
-class CallerTest extends PHPUnit_Framework_TestCase
+class CallerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSomething()
+    public function testCall()
     {
         $caller = new Caller(
             'https://api.flickr.com/services/rest/',
