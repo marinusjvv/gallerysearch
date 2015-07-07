@@ -11,8 +11,11 @@ class PictureDataTest extends \PHPUnit_Framework_TestCase
         $xml = simplexml_load_string(TestHelper::getValidXMLResponseExample());
         $pictureData = new PictureData($xml->photos->photo[1]);
         $this->assertEquals(
-            'https://farm2.staticflickr.com/2/2_b.jpg',
-            (string)$pictureData
+            array(
+           		'url' => 'https://farm2.staticflickr.com/2/2_b.jpg',
+            	'title' => 'b',
+            ),
+            $pictureData->getData()
         );
     }
 }
