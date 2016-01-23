@@ -14,16 +14,7 @@ class Search
         } catch (Exceptions\InvalidSearchStringException $e) {
             return $this->buildErrorResponse($e);
         }
-        $caller = new Caller(
-            API_URL,
-            array(
-                'method' => API_SEARCH_METHOD,
-                'api_key' => API_KEY,
-                'per_page' => 5,
-                'page' => $page,
-                'tags' => $search_string,
-            )
-        );
+        $caller = $this->getApiCaller($page, $search_string);
         try {
         	$response = new Response\XmlParser($caller->call());
         } catch (Exceptions\InvalidResponseXMLException $e) {
@@ -35,6 +26,21 @@ class Search
             'page_data' => $response->getPageData()->getOutputData(),
             'pictures_data' => $response->getPicturesData(),
         );
+    }
+
+    private function getApiCaller($page, $search_string)
+    {
+        $caller = new Caller(
+            API_URL,
+            array(
+                'method' => API_SEARCH_METHOD,
+                'api_key' => API_KEY,
+                'per_page' => API_RESULTS_PER_PAGE,
+                'page' => $page,
+                'tags' => $search_string,
+            )
+        );
+        return $caller;
     }
     
     private function buildErrorResponse(\Exception $e)
